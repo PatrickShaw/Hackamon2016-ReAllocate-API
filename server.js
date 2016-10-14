@@ -16,7 +16,15 @@ app.set('view engine', 'jsx');
 app.engine('jsx', reactExpress.createEngine({presets: ['react', 'es2015']}));
 app.use(express.static(__dirname + "/reports"));
 
-// 
+// make/connect to db
+mongoose.connect('mongodb://localhost/reAllocate');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    // connected
+    console.log("connected to reAllocate db");
+});
+
 
 app.get('/', function(req, res) {
     res.render("index",{});
