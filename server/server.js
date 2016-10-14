@@ -1,17 +1,14 @@
-/**
- * @author Patrick Shaw (Patrick.Leong.Shaw@gmail.com)
- * @date 14/10/2016
- */
 const request = require('request');
 const express = require('express');
-const mongoose = require("mongoose");
-
+const mongoose = require('mongoose');
+const Unit = require('./models/unit');
+const Student = require('./models/student');
+const Class = require('./models/class');
 const isNumeric = require("is_numeric");
 
 const app = express();
 const server = app.listen(3000);
 const reactExpress = require('express-react-views');
-
 // view engine
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
@@ -36,31 +33,33 @@ function sendError(req, res, errorMessage) {
     });
 }
 
-
-app.get('/students/:studentId/units/:unitId', function(req, res) {
-    var studentId = req.params.studentId;
-    var unitId = req.params.unitId;
-    if(!isNumeric(studentId)) {
+app.get('/students/:studentUuid/units/:unitUuid', function(req, res) {
+    var studentUuid = req.params.studentUuid;
+    var unitUuid = req.params.unitUuid;
+    if(!isNumeric(studentUuid)) {
         res.status(400);
         sendError(req, res, "Invalid unitId.")
-    } else if(!isNumeric(studentId)) {
+    } else if(!isNumeric(unitUuid)) {
         res.status(400);
         sendError(req, res, "Invalid studentId.");
     }
-    // TODO: David is a poo poo
+    var unit = Unit.findOne({'uuid' : unitUuid });
+    console.log(unit);
 });
-
-app.get('/units/:unitId', function(req, res) {
-    var unitId = req.unitId;
-    if(!isNumeric(unitId)) {
+app.get('/units/:unitUuid', function(req, res) {
+    var unitUuid = req.params.unitUuid;
+    if(!isNumeric(unitUuid)) {
         res.status(400);
         sendError(req, res, "Invalid unitId.");
     }
     // TODO: Liam is such poo poo
 });
 
-app.get('/students/:int(\\d+)', function(req, res) {
-
+app.get('/students/:studentUuId', function(req, res) {
+    var studentUuid = req.params.studentUuid;
+    if(!isNumeric(studentUuid)) {
+        res.status(400);
+    }
 });
 
 app.post('/swap', function(req, res) {
