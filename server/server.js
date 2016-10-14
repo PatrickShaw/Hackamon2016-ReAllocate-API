@@ -5,6 +5,9 @@ const Unit = require('./models/unit');
 const Student = require('./models/student');
 const Class = require('./models/class');
 const isNumeric = require("is_numeric");
+const mongoose = require("mongoose");
+
+const isNumeric = require("./util/is_numeric");
 
 const app = express();
 const server = app.listen(3000);
