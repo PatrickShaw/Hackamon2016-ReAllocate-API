@@ -18,7 +18,6 @@ app.set('view engine', 'jsx');
 app.engine('jsx', reactExpress.createEngine({presets: ['react', 'es2015']}));
 app.use(express.static(__dirname + "/reports"));
 
-<<<<<<< HEAD:server.js
 //
 app.get('/students/:int(\\d+)', function(req, res){
     // Get user info based on the user id.
@@ -55,10 +54,10 @@ app.get('/units/:int(\\d+)', function(req, res) {
 
 });
 
-app.get('students/:int(\\d+)')
+app.get('students/:int(\\d+)');
 
 app.post('/', function(req, res) {
-=======
+});
 // make/connect to db
 mongoose.connect('mongodb://localhost/reAllocate');
 var db = mongoose.connection;
@@ -67,10 +66,7 @@ db.once('open', function() {
     // connected
     console.log("connected to reAllocate db");
 });
-
->>>>>>> a126c90d0d96317c14913dadd566129dfc4362ea:server/server.js
-
-};
 app.get('/', function(req, res) {
     res.render("index",{});
 });
+
