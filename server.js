@@ -7,7 +7,6 @@ const express = require('express');
 const mongoose = require("mongoose");
 
 const app = express();
-const server = app.listen(3000);
 const reactExpress = require('express-react-views');
 
 // view engine
@@ -29,3 +28,52 @@ db.once('open', function() {
 app.get('/', function(req, res) {
     res.render("index",{});
 });
+
+
+
+Unit = require('./models/unit');
+
+// db tests 
+app.get('/testADDdb', function(req, res) {
+
+    console.log("test adding to db");
+    var unit = {
+        uuid: "abcd",
+        title: "Software Engineering",
+        code: "FIT3029",
+        classes: ["No"],
+        required: ["Nothing"]
+    };
+    
+    Unit.testAddUnit(unit, function(err, unit){
+        if (err){
+            console.log("Error: " + err + " - " + unit);
+            throw err
+        } else {
+            console.log("Added " + unit);
+            res.json(unit);
+        }
+    });
+});
+
+app.get('/testSEEdb', function(req, res) {
+    // shows everything in db
+    console.log("Showing all entries in db")
+    Unit.find(function(err, units) {
+        if (err) {
+            return console.error(err);
+        }
+        console.log(units);
+    });
+});
+
+app.get('/testREMOVEdb', function(req, res){
+    // remove everything in Unit model
+    console.log("Removing db")
+    Unit.remove({}, function(err) {
+        console.log('collection removed')
+    });
+     
+});
+
+const server = app.listen(3000);

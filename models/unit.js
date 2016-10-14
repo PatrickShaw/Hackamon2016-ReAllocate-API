@@ -27,3 +27,10 @@ var unitSchema = mongoose.Schema({
 });
 
 var Unit = module.exports = mongoose.model('Unit', unitSchema);
+
+// test adding a unit
+module.exports.testAddUnit = function(unit, callback){
+    Unit.create(unit, callback);
+};
+
+
