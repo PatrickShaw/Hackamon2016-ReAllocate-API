@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const Unit = require('./models/unit');
 const Student = require('./models/student');
 const Class = require('./models/class');
-
+const validatonAlgorithms = require('./util/validationAlgorithms.js');
 const isNumeric = require("./util/is_numeric");
 
 const app = express();
@@ -116,6 +116,21 @@ app.post('/dev/student/add', function(req, res) {
     })
 });
 
+// get student
+app.get('/students/:studentUuid', function(req, res) {
+    var stuUuid = req.params.studentUuid;
+    console.log("check /students/:studentUuid - " + stuUuid);
+    Student.getStudentByUuid(stuUuid, function(err, obj) {
+        if ((err) || (obj === null)) {
+            console.log("Error at /students/:studentUuid, err: " + err + ", obj: " + obj );
+        } else {
+            console.log("Passed - /students/:studentUuid, err: " + err + ", obj: " + obj );
+        }
+
+        res.send(JSON.stringify(obj));
+    });
+});
+
 // authenticate a student via username and password
 app.post('/login', function(req, res) {
     
@@ -126,7 +141,7 @@ app.post('/login', function(req, res) {
     
     console.log("check /login - body: " + jsonBody + ", username: " + studentUsername +  ", password: " + studentPassword);
     
-    Student.authStudent(studentUsername, studentPassword, function(obj, err) {
+    Student.authStudent(studentUsername, studentPassword, function(err, obj) {
         if ((err) || (obj === null)) {
             console.log("Error at /login, err: " + err + ", obj: " + obj );
         } else {
@@ -137,9 +152,24 @@ app.post('/login', function(req, res) {
     })
 });
 
-app.post('/swap', function(req, res) {
+// add to swap queue if valid info 
+app.post('/student/:studentUuid/units/:unitUuid/classes/swap', function(req, res) {
+    var unitUuid = req.params.unitUuid;
+    console.log("check /student/:studentUuid/units/:unitUuid/classes/swap - unitUuid: " + unitUuid);
+    var studentUuid = req.params.studentUuid;
+    console.log("check /student/:studentUuid/units/:unitUuid/classes/swap - studentUuid: " + studentUuid);
+    var jsonBody = req.body;                        // json has swapPreferences (Array)
+    console.log("check /student/:studentUuid/units/:unitUuid/classes/swap - jsonBody: " + jsonBody);
+    var swapPreferences = jsonBody.swapPreferences; // a list of class uuid's to add the student to that queue of
+
+    // check student is enrolled in that unit
+    // check class is in that unit
+    // check is class available to swap into
+
 
 });
+
+
 
 // make/connect to db
 mongoose.connect('mongodb://localhost/reAllocate');
@@ -168,3 +198,7 @@ app.get('/testmail', function(req, res) {
     mailer.sendSuccessEmail(recipientEmail, swappedIntoClass);
     console.log("Send mail =]")
 });
+
+var interval = 30000;
+var timedEvent = setInterval(validatonAlgorithms.checkServiceOnTimer, interval);
+

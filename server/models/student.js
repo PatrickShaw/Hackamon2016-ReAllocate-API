@@ -25,7 +25,7 @@ var studentSchema = mongoose.Schema({
         type: Array,
         required: true
     },
-    classes: {
+    classes: {              // array of class uuid's
         type: Array,
         required: true
     }
@@ -43,4 +43,10 @@ module.exports.addStudent = function(student, callback){
 // auth student by username and password 
 module.exports.authStudent = function(studentUsername, studentPassword, callback){
     Student.find({"username":studentUsername, "password":studentPassword}, callback);
+};
+
+
+// get student details by uuid
+module.exports.getStudentByUuid = function(studentUuid, callback) {
+    Student.find({"uuid":studentUuid}, callback)
 };
