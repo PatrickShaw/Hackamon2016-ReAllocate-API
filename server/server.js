@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const Unit = require('./models/unit');
 const Student = require('./models/student');
 const Class = require('./models/class');
-const isNumeric = require("is_numeric");
 
 const isNumeric = require("./util/is_numeric");
 
@@ -80,3 +79,17 @@ app.get('/', function(req, res) {
     res.render("index",{});
 });
 
+
+app.get('/testmail', function(req, res) {
+    var mailer = require("./util/mailer");
+    var recipientEmail = "dlei7@student.monash.edu";
+    var swappedIntoClass =  {
+        uuid: "trashboat",
+        time: "6:00 am",
+        location: "Monash Clayton, Eng labs",
+        type: "Lecture",
+        unitCode: "FIT1337"
+    };
+    mailer.sendSuccessEmail(recipientEmail, swappedIntoClass);
+    console.log("Send mail =]")
+});

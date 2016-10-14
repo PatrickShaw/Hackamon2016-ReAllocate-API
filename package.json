@@ -35,6 +35,7 @@
     "react-tap-event-plugin": "^1.0.0",
     "request": "^2.75.0",
     "webpack": "^1.13.2",
-    "mongoose":"*"
+    "mongoose":"*",
+    "nodemailer":"*"
   }
 }
