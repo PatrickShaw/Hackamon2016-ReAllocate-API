@@ -17,6 +17,10 @@ var classSchema = mongoose.Schema({
         // can be lecture, tutorial, lab etc
         type: String,
         required: true
+    },
+    unitCode: {
+        type: String,
+        required: true
     }
 });
 
