@@ -1,12 +1,8 @@
-/**
- * @author Patrick Shaw (Patrick.Leong.Shaw@gmail.com)
- * @date 14/10/2016
- */
 const request = require('request');
 const express = require('express');
 const mongoose = require("mongoose");
 
-const isNumeric = require("is_numeric");
+const isNumeric = require("server/util/is_numeric");
 
 const app = express();
 const server = app.listen(3000);
