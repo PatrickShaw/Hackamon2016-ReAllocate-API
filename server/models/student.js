@@ -5,6 +5,14 @@ var studentSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    firstname: {
+        type: String,
+        required: true
+    },
+    lastname: {
+        type: String,
+        required: true
+    },
     username: {
             type: String,
             required: true
@@ -26,3 +34,13 @@ var studentSchema = mongoose.Schema({
 
 
 var Student = module.exports = mongoose.model('Student', studentSchema);
+
+// add student
+module.exports.addStudent = function(student, callback){
+    Student.create(student, callback);
+};
+
+// auth student by username and password 
+module.exports.authStudent = function(studentUsername, studentPassword, callback){
+    Student.find({"username":studentUsername, "password":studentPassword}, callback);
+};

@@ -5,8 +5,8 @@ var classSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    time: {
-        type: String,
+    datetime: {
+        type: Date,
         required: true
     },
     location: {
@@ -20,6 +20,18 @@ var classSchema = mongoose.Schema({
     },
     unitCode: {
         type: String,
+        required: true
+    },
+    capacity: {
+        type: Number,
+        required: true
+    },
+    noStudents: {
+        type: Number,
+        required: true
+    },
+    swappable: {
+        type: Boolean,
         required: true
     }
 });

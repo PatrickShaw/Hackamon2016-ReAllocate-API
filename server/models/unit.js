@@ -24,3 +24,15 @@ var unitSchema = mongoose.Schema({
 });
 
 var Unit = module.exports = mongoose.model('Unit', unitSchema);
+
+// add unit
+module.exports.addUnit = function(unit, callback){
+    Unit.create(unit, callback);
+};
+
+// find unit
+module.exports.findUnit = function(uuid, callback){
+    Unit.findOne({"uuid":uuid}, callback);
+};
+
+

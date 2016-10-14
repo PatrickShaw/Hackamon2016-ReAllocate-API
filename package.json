@@ -27,15 +27,16 @@
   "dependencies": {
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "express-react-views": "^0.10.2",
     "material-ui": "^0.16.0",
+    "mongoose": "*",
+    "nodemailer": "*",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-tap-event-plugin": "^1.0.0",
     "request": "^2.75.0",
-    "webpack": "^1.13.2",
-    "mongoose":"*",
-    "nodemailer":"*"
+    "webpack": "^1.13.2"
   }
 }
