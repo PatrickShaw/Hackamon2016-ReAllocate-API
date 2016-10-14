@@ -50,13 +50,21 @@ app.get('/students/:studentId/units/:unitId', function(req, res) {
     // TODO: David is a poo poo
 });
 
-app.get('/units/:int(\\d+)', function(req, res) {
+app.get('/units/:unitId', function(req, res) {
+    var unitId = req.unitId;
+    if(!isNumeric(unitId)) {
+        res.status(400);
+        sendError(req, res, "Invalid unitId.");
+    }
+    // TODO: Liam is such poo poo
+});
+
+app.get('/students/:int(\\d+)', function(req, res) {
 
 });
 
-app.get('students/:int(\\d+)');
+app.post('/swap', function(req, res) {
 
-app.post('/', function(req, res) {
 });
 // make/connect to db
 mongoose.connect('mongodb://localhost/reAllocate');
