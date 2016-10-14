@@ -16,7 +16,7 @@ var studentSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    unit: {
+    units: {
         type: Array,
         required: true
     },

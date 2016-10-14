@@ -16,7 +16,11 @@ var unitSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    classes : {
+    classes: {
+        type: Array,
+        required: true
+    },
+    required: {
         type: Array,
         required: true
     }
